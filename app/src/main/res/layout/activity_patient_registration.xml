@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.riksolution.medreport.PatientRegistrationActivity">
+
+    <ScrollView
+        android:layout_width="368dp"
+        android:layout_height="484dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/scrollReg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top">
+
+            <EditText
+                android:id="@+id/etFullName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:ems="10"
+                android:hint="Fullname"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp" />
+
+            <EditText
+                android:id="@+id/btnNoLane"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="House No. and Lane"
+                android:inputType="textPostalAddress"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etFullName"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp" />
+
+            <EditText
+                android:id="@+id/btnCity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="City"
+                android:inputType="textPostalAddress"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnNoLane"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp" />
+
+            <EditText
+                android:id="@+id/etProvince"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Province"
+                android:inputType="textPostalAddress"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnCity"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Mobile Phone"
+                android:inputType="phone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etProvince"
+                tools:layout_conversion_absoluteHeight="0dp"
+                tools:layout_conversion_absoluteWidth="0dp" />
+
+            <EditText
+                android:id="@+id/etDateofBirth"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:ems="10"
+                android:hint="Date of Birth"
+                android:inputType="number"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPhone" />
+
+            <EditText
+                android:id="@+id/etGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Gender"
+                android:inputType="textCapCharacters"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDateofBirth" />
+
+            <EditText
+                android:id="@+id/etOccupation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Occupation"
+                android:inputType="textPersonName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etGender" />
+
+            <EditText
+                android:id="@+id/etHabbits"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Habbits"
+                android:inputType="textMultiLine"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etOccupation" />
+
+            <EditText
+                android:id="@+id/etAllergies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Allergies"
+                android:inputType="textMultiLine"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etHabbits" />
+
+            <EditText
+                android:id="@+id/etMedicalHistory"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Past Medical HIstory"
+                android:inputType="textPersonName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etAllergies" />
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etMedicalHistory" />
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etUsername" />
+
+            <EditText
+                android:id="@+id/etPasswordReenter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Re-Enter Password"
+                android:inputType="textPassword"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="200dp"
+                android:layout_height="46dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="25dp"
+                android:text="Register"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPasswordReenter" />
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

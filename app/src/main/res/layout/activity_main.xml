@@ -18,7 +18,6 @@
         android:layout_marginTop="8dp"
         android:background="@android:color/darker_gray"
         android:backgroundTint="@android:color/darker_gray"
-        android:onClick="onClickUserLogin"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
