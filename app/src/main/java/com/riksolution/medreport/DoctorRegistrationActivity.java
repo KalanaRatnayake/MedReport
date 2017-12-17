@@ -10,9 +10,11 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,13 +30,24 @@ import helper.SessionManager;
 public class DoctorRegistrationActivity extends AppCompatActivity {
     private EditText fullname;
     private EditText regNumber;
+    private EditText contactNo;
+    private EditText hospital;
+    private EditText nic;
+
     private EditText userName;
     private EditText passWord;
+
+    private String username;
+    private String password;
 
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
-    private static final String TAG = DoctorRegistrationActivity.class.getSimpleName();
+
+    private RequestQueue requestQueue;
+    private StringRequest strReq;
+    //private static final String TAG = DoctorRegistrationActivity.class.getSimpleName();
+    private static final String URL = "http://10.10.26.56/edc/user_control.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,31 +62,79 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
 
         // Session manager
-        session = new SessionManager(getApplicationContext());
+        //session = new SessionManager(getApplicationContext());
 
         // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        //db = new SQLiteHandler(getApplicationContext());
+        requestQueue = Volley.newRequestQueue(this);
 
 
     }
 
     public void sendPost(View view) {
 
-        String username = userName.getText().toString().trim();
-        String password = passWord.getText().toString().trim();
+        username = userName.getText().toString().trim();
+        password = passWord.getText().toString().trim();
 
         if (!username.isEmpty() && !password.isEmpty()) {
-            registerUser(username, password);
-        } else {
+            //registerUser(username, password);
+            strReq = new StringRequest(Request.Method.POST,
+                    URL, new Response.Listener<String>() {
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if(jsonObject.names().get(0).equals("success")){
+                            Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    HashMap<String,String> hashMap = new HashMap<String, String>();
+                    hashMap.put("username",userName.getText().toString().trim());
+                    hashMap.put("password",passWord.getText().toString().trim());
+
+                    return hashMap;
+                }
+            };
+
+            requestQueue.add(this.strReq);
+
+            }
+
+         else {
             Toast.makeText(getApplicationContext(),
                     "Please enter your details!", Toast.LENGTH_LONG)
                     .show();
         }
     }
 
+
+
+
+
+
+
+//tutorial version
+
+
     private void registerUser(final String username,
                               final String password) {
-        // Tag used to cancel the request
+        // Tag used to cancel the strReq
         String tag_string_req = "req_register";
 
         pDialog.setMessage("Registering ...");
@@ -149,7 +210,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
         };
 
-        // Adding request to request queue
+        // Adding strReq to strReq queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
