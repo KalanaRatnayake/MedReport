@@ -1,5 +1,6 @@
 package com.riksolution.medreport;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import helper.SQLiteHandler;
+import helper.SessionManager;
 
 
 public class DoctorRegistrationActivity extends AppCompatActivity {
@@ -80,8 +82,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
         if (!username.isEmpty() && !password.isEmpty()) {
             //registerUser(username, password);
-            strReq = new StringRequest(Request.Method.POST,
-                    URL, new Response.Listener<String>() {
+            strReq = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 public void onResponse(String response) {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
