@@ -62,6 +62,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
            startActivity(intentSignIn);
        } else {
            Toast.makeText(getApplicationContext(), "Invalid credentials, please try again.", Toast.LENGTH_LONG).show();
+           closeDialog();
        }
    }
 
@@ -69,6 +70,10 @@ public class DoctorLoginActivity extends AppCompatActivity {
         if (!pDialog.isShowing())
             pDialog.show();
    }
+    private void closeDialog() {
+        if (pDialog.isShowing())
+            pDialog.hide();
+    }
 
    public void register(View view){
        Intent intentRegistration = new Intent(getApplicationContext(), DoctorRegistrationActivity.class);
