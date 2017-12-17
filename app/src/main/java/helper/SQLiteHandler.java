@@ -11,48 +11,28 @@ import java.util.HashMap;
 
 /**
  * Created by Isuru Samaranayake on 12/17/2017.
+ * Updated by Kalana Ratnayake on 12/17/2017.
  */
 
 public class SQLiteHandler extends SQLiteOpenHelper {
 
     private static final String TAG = SQLiteHandler.class.getSimpleName();
 
-    // All Static variables
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
-
-    // Database Name
-    private static final String DATABASE_NAME = "android_api";
-
-    // Login table name
-    private static final String TABLE_USER = "user";
-
-    // Login Table Columns names
-    private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
-    private static final String KEY_EMAIL = "email";
-    private static final String KEY_UID = "uid";
-    private static final String KEY_CREATED_AT = "created_at";
-
     public SQLiteHandler(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, "MedReportLocal", null, 1);
     }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_EMAIL + " TEXT UNIQUE," + KEY_UID + " TEXT,"
-                + KEY_CREATED_AT + " TEXT" + ")";
-        sqLiteDatabase.execSQL(CREATE_LOGIN_TABLE);
+        sqLiteDatabase.execSQL("CREATE TABLE Doctor( unique_id varchar(23) primary key, firstName Varchar(50) Not Null, lastName Varchar(50) Not Null, regNo varChar(10) Not Null, nicNo varChar(12) Not Null, contactNo numeric Not null, username varchar(50) not null UNIQUE, doc_password varchar(80) not null, hospital varChar(50) not null )");
 
-        Log.d(TAG, "Database tables created");
-
+        Log.d(TAG, "Database created");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         // Drop older table if existed
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS Doctor");
 
         // Create tables again
         onCreate(sqLiteDatabase);
@@ -60,31 +40,55 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     }
 
     /*Enter data locally*/
-    public void addUser(String name, String email, String uid, String created_at) {
+    public void addDoctor(String uniqueID, String FirstName, String LastName, String RegistrationNo, String NIC, String Hospital, String ContactNo, String UserName, String Password) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, name); // Name
-        values.put(KEY_EMAIL, email); // Email
-        values.put(KEY_UID, uid); // Email
-        values.put(KEY_CREATED_AT, created_at); // Created At
+        values.put("unique_id", uniqueID);
+        values.put("firstName", FirstName);
+        values.put("lastName", LastName);
+        values.put("regNo", RegistrationNo);
+        values.put("nicNo", NIC);
+        values.put("hospital", Hospital);
+        values.put("contactNo", ContactNo);
+        values.put("username", UserName);
+        values.put("doc_password", Password);
 
         // Inserting Row
-        long id = db.insert(TABLE_USER, null, values);
+        long id = db.insert("Doctor", null, values);
         db.close(); // Closing database connection
 
-        Log.d(TAG, "New user inserted into sqlite: " + id);
+        Log.d(TAG, FirstName + LastName + "registered as a new Doctor");
     }
 
     /**
-     * Getting user data from database
+     * Getting Doctor data from database
      * */
-    public HashMap<String, String> getUserDetails() {
+
+    public boolean validDoctor(String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectString = "SELECT * FROM Doctor WHERE username = ? AND doc_password = ?";
+
+        Cursor cursor = db.rawQuery(selectString, new String[]{email, password});
+        boolean exist;
+        if(cursor.getCount()>0){
+            exist=true;
+        } else {
+            exist=false;
+        }
+        db.close();
+        cursor.close();
+
+        return exist;
+    }
+
+    /*public HashMap<String, String> getDocDetails(String UserName) {
         HashMap<String, String> user = new HashMap<String, String>();
-        String selectQuery = "SELECT  * FROM " + TABLE_USER;
+        String selectQuery = "SELECT  * FROM Doctor";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+
         // Move to first row
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
@@ -99,15 +103,15 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         Log.d(TAG, "Fetching user from Sqlite: " + user.toString());
 
         return user;
-    }
+    }*/
 
     /**
      * Re crate database Delete all tables and create them again
      * */
-    public void deleteUsers() {
+    public void deleteDoctor() {
         SQLiteDatabase db = this.getWritableDatabase();
         // Delete All Rows
-        db.delete(TABLE_USER, null, null);
+        db.delete("Doctor", null, null);
         db.close();
 
         Log.d(TAG, "Deleted all user info from sqlite");

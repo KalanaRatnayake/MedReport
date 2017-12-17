@@ -1,10 +1,10 @@
 package com.riksolution.medreport;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,12 +22,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import app.AppConfig;
-import app.AppController;
-import helper.SQLiteHandler;
-import helper.SessionManager;
 
 public class DoctorRegistrationActivity extends AppCompatActivity {
+
     private EditText fullname;
     private EditText regNumber;
     private EditText contactNo;
@@ -49,10 +46,12 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     //private static final String TAG = DoctorRegistrationActivity.class.getSimpleName();
     private static final String URL = "http://10.10.26.56/edc/user_control.php";
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_registration);
+
 
         userName = (EditText)findViewById(R.id.etDocUsername);
         passWord = (EditText)findViewById(R.id.etDocPassword);
@@ -131,3 +130,4 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
 
 }
+
