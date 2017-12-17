@@ -51,8 +51,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private StringRequest strReq;
     //private static final String TAG = DoctorRegistrationActivity.class.getSimpleName();
-    private static final String URL = "http://10.10.26.56/edc/user_control.php";
-    private StringRequest request;
+    private static final String URL = "http://10.10.26.56/MedReport/doctorRegister.php";
     private SQLiteHandler dbhandler;
 
     @Override
@@ -64,6 +63,13 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         userName = (EditText)findViewById(R.id.etDocUsername);
         passWord = (EditText)findViewById(R.id.etDocPassword);
         checkPassWord = (EditText)findViewById(R.id.etPasswordReenter);
+
+        firstname = (EditText)findViewById(R.id.etDocFirstName);
+        lastname = (EditText)findViewById(R.id.etDocLastName);
+        nic = (EditText)findViewById(R.id.etNIC);
+        regNumber = (EditText)findViewById(R.id.etDocRegNo);
+        contactNo = (EditText)findViewById(R.id.etContactNo);
+        hospital = (EditText)findViewById(R.id.etHospital);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -131,6 +137,12 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                     HashMap<String,String> hashMap = new HashMap<String, String>();
                     hashMap.put("username",userName.getText().toString().trim());
                     hashMap.put("password",passWord.getText().toString().trim());
+                    hashMap.put("firstName",firstname.getText().toString().trim());
+                    hashMap.put("lastName",lastname.getText().toString().trim());
+                    hashMap.put("regNo",regNumber.getText().toString().trim());
+                    hashMap.put("contactNo",contactNo.getText().toString().trim());
+                    hashMap.put("hospital",hospital.getText().toString().trim());
+                    hashMap.put("nicNo",nic.getText().toString().trim());
 
                     return hashMap;
                 }
