@@ -77,7 +77,10 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         // SQLite database handler
-        dbhandler = new SQLiteHandler(getApplicationContext());
+
+        db = new SQLiteHandler(getApplicationContext());
+
+
         requestQueue = Volley.newRequestQueue(this);
     }
 
@@ -109,7 +112,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                             String Encrypted_password = user.getString("Encrypted_password");
                             String Hospital = user.getString("Hospital");
 
-                            dbhandler.addDoctor(uid,firstName,lastName,regNo,nicNo,Hospital,contactNo,Username,Encrypted_password );
+                            db.addDoctor(uid,firstName,lastName,regNo,nicNo,Hospital,contactNo,Username,Encrypted_password );
 
                             startActivity(new Intent(getApplicationContext(),DoctorLoginActivity.class));
                         }else {
