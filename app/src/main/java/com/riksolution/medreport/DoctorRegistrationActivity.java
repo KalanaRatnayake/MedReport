@@ -22,6 +22,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import helper.SQLiteHandler;
+
 
 public class DoctorRegistrationActivity extends AppCompatActivity {
 
@@ -30,6 +32,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private static final String URL = "http://10.10.26.56/edc/user_control.php";
     private StringRequest request;
+    private SQLiteHandler dbhandler;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -51,11 +54,27 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            if(jsonObject.names().get(0).equals("success")){
+                            boolean error = jsonObject.getBoolean("error");
+                            if(!error){
+                                //usr successfully registered
                                 Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
+                                String uid = jsonObject.getString("uid");
+                                JSONObject user = jsonObject.getJSONObject("user");
+                                String firstName = user.getString("firstName");
+                                String lastName = user.getString("lastName");
+                                String regNo = user.getString("regNo");
+                                String nicNo = user.getString("nicNo");
+                                String contactNo = user.getString("contactNo");
+                                String Username = user.getString("Username");
+                                String Encrypted_password = user.getString("Encrypted_password");
+                                String Hospital = user.getString("Hospital");
+
+                                dbhandler.addDoctor(uid,firstName,lastName,regNo,nicNo,Hospital,contactNo,Username,Encrypted_password );
+
+                                startActivity(new Intent(getApplicationContext(),DoctorLoginActivity.class));
                             }else {
-                                Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Error " +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {

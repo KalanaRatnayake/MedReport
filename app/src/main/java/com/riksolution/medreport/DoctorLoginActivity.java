@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import helper.SQLiteHandler;
 import helper.SessionManager;
 
@@ -38,7 +41,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
        username = userName.getText().toString();
        password = passWord.getText().toString();
 
-       sendCred(username,password);
+       sendCred(username,md5(password));
    }
 
    public void sendCred(final String username, final String password){
@@ -66,5 +69,29 @@ public class DoctorLoginActivity extends AppCompatActivity {
        Intent intentRegistration = new Intent(getApplicationContext(), DoctorRegistrationActivity.class);
        startActivity(intentRegistration);
    }
+
+   public static final String md5(final String s) {
+       final String MD5 = "MD5";
+       try {
+           // Create MD5 Hash
+           MessageDigest digest = java.security.MessageDigest.getInstance(MD5);
+           digest.update(s.getBytes());
+           byte messageDigest[] = digest.digest();
+
+           // Create Hex String
+           StringBuilder hexString = new StringBuilder();
+           for (byte aMessageDigest : messageDigest) {
+               String h = Integer.toHexString(0xFF & aMessageDigest);
+               while (h.length() < 2)
+                   h = "0" + h;
+               hexString.append(h);
+           }
+           return hexString.toString();
+
+       } catch (NoSuchAlgorithmException e) {
+           e.printStackTrace();
+       }
+       return "";
+    }
 }
 
