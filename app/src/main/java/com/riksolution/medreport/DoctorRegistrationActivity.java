@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -81,8 +80,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         // SQLite database handler
         //db = new SQLiteHandler(getApplicationContext());
         requestQueue = Volley.newRequestQueue(this);
-
-
     }
 
     public void sendPost(View view) {
@@ -100,8 +97,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                         boolean error = jsonObject.getBoolean("error");
                         if(!error){
                             //usr successfully registered
-                            Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
-
                             String uid = jsonObject.getString("uid");
                             JSONObject user = jsonObject.getJSONObject("user");
                             String firstName = user.getString("firstName");
@@ -117,7 +112,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
                             startActivity(new Intent(getApplicationContext(),DoctorLoginActivity.class));
                         }else {
-                            Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Error : " +jsonObject.getString("error_msg"), Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (JSONException e) {
@@ -154,8 +149,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
          else {
             Toast.makeText(getApplicationContext(),
-                    "Please enter your details!", Toast.LENGTH_LONG)
-                    .show();
+                    "Please enter your details!", Toast.LENGTH_LONG).show();
         }
     }
 
