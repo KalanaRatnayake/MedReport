@@ -44,7 +44,9 @@
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait" />
         <activity android:name=".DoctorHomepageActivity" />
-        <activity android:name=".PatientHomepageActivity"></activity>
+        <activity android:name=".PatientHomepageActivity" />
+        <activity android:name=".DocInputActivity" />
+        <activity android:name=".DocDisplayHistoryActivity"></activity>
     </application>
 
 </manifest>
