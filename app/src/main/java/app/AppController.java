@@ -1,7 +1,8 @@
 package app;
 
-import com.riksolution.medreport.MainActivity;
-//import android.app.Application;
+//import com.riksolution.medreport.MainActivity;
+import android.app.Application;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -13,7 +14,7 @@ import com.android.volley.toolbox.Volley;
  */
 
 
-public class AppController extends MainActivity {
+public class AppController extends Application {
     public static final String TAG = AppController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
