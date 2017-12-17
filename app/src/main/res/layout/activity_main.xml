@@ -27,7 +27,7 @@
         app:srcCompat="@drawable/user_login" />
 
     <ImageButton
-        android:id="@+id/btnDocLogin"
+        android:id="@+id/btnDoctor"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="152dp"
         android:layout_height="175dp"
