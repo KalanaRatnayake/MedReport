@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchDoctor(View view){
-        Intent i = new Intent(MainActivity.this,DoctorRegistrationActivity.class);
+        Intent i = new Intent(MainActivity.this,DoctorLoginActivity.class);
         startActivity(i);
         finish();
     }
