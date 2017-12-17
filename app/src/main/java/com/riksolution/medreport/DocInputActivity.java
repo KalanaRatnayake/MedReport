@@ -53,7 +53,7 @@ public class DocInputActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private StringRequest strReq;
     //private static final String TAG = DoctorRegistrationActivity.class.getSimpleName();
-    private static final String URL = "http://10.10.26.56/edc/user_control.php";
+    private static final String URL = "http://10.10.26.56/MedReport/medrecordAd.php";
 
 
     @Override
@@ -74,6 +74,13 @@ public class DocInputActivity extends AppCompatActivity {
 
         patientName = (EditText)findViewById(R.id.patientName);
         patientNIC = (EditText)findViewById(R.id.patientNIC);
+
+        age = (EditText)findViewById(R.id.patientAge);
+        area = (EditText)findViewById(R.id.patientArea);
+        date = (EditText)findViewById(R.id.date);
+        diagnosis = (EditText)findViewById(R.id.diagnosis);
+        disease = (EditText)findViewById(R.id.disease);
+        treatment = (EditText)findViewById(R.id.treatment);
 
 
 
@@ -115,8 +122,19 @@ public class DocInputActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     HashMap<String, String> hashMap = new HashMap<String, String>();
-                    hashMap.put("username", patientName.getText().toString().trim());
-                    hashMap.put("password", patientNIC.getText().toString().trim());
+                    hashMap.put("name", patientName.getText().toString().trim());
+                    hashMap.put("nicNo", patientNIC.getText().toString().trim());
+                    hashMap.put("docId", patientNIC.getText().toString().trim());
+                    hashMap.put("place", area.getText().toString().trim());
+                    hashMap.put("cTime", date.getText().toString().trim());
+                    hashMap.put("age", age.getText().toString().trim());
+                    hashMap.put("diagnosis", diagnosis.getText().toString().trim());
+                    hashMap.put("disease", disease.getText().toString().trim());
+                    hashMap.put("treatment", treatment.getText().toString().trim());
+                    //hashMap.put("type", type.getText().toString().trim());
+
+
+
 
                     return hashMap;
                 }
