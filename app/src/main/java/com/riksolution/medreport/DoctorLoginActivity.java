@@ -15,7 +15,6 @@ import helper.SQLiteHandler;
 import helper.SessionManager;
 
 public class DoctorLoginActivity extends AppCompatActivity {
-    //TextView content;
     EditText userName, passWord;
     String username, password;
     private ProgressDialog pDialog;
