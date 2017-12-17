@@ -26,7 +26,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE Doctor( unique_id varchar(23) primary key, firstName Varchar(50) Not Null, lastName Varchar(50) Not Null, regNo varChar(10) Not Null, nicNo varChar(12) Not Null, contactNo numeric Not null, username varchar(50) not null UNIQUE, doc_password varchar(80) not null, hospital varChar(50) not null )");
 
-        Log.d(TAG, "Database tables created");
+        Log.d(TAG, "Database created");
     }
 
     @Override
@@ -64,7 +64,25 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Getting Doctor data from database
      * */
-    /*public HashMap<String, String> getUserDetails() {
+
+    public boolean validDoctor(String email, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String selectString = "SELECT * FROM Doctor WHERE username = ? AND doc_password = ?";
+
+        Cursor cursor = db.rawQuery(selectString, new String[]{email, password});
+        boolean exist;
+        if(cursor.getCount()>0){
+            exist=true;
+        } else {
+            exist=false;
+        }
+        db.close();
+        cursor.close();
+
+        return exist;
+    }
+
+    /*public HashMap<String, String> getDocDetails(String UserName) {
         HashMap<String, String> user = new HashMap<String, String>();
         String selectQuery = "SELECT  * FROM Doctor";
 
@@ -85,8 +103,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         Log.d(TAG, "Fetching user from Sqlite: " + user.toString());
 
         return user;
-    }
-    */
+    }*/
 
     /**
      * Re crate database Delete all tables and create them again
