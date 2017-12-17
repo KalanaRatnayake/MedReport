@@ -97,6 +97,8 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                         boolean error = jsonObject.getBoolean("error");
                         if(!error){
                             //usr successfully registered
+                            Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
+
                             String uid = jsonObject.getString("uid");
                             JSONObject user = jsonObject.getJSONObject("user");
                             String firstName = user.getString("firstName");

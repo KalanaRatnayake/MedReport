@@ -32,6 +32,11 @@ public class DoctorLoginActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
+        //database init
+        db = new SQLiteHandler(getApplicationContext());
+
+        //session manager
+        session = new SessionManager(getApplicationContext());
     }
 
    public void checkLogin(View view){
@@ -49,10 +54,10 @@ public class DoctorLoginActivity extends AppCompatActivity {
        showDialog();
 
        boolean recordExists = db.validDoctor(username, password);
-       if(recordExists == true){
+       if(recordExists){
            //user can be successfully logged in
            session.setLogin(true);
-           Intent intentSignIn = new Intent(getApplicationContext(), DoctorHomepageActivity.class);
+           Intent intentSignIn = new Intent(getApplicationContext(), MainActivity.class);
            Toast.makeText(getApplicationContext(), "Login successful, redirecting to Home Page.", Toast.LENGTH_LONG).show();
            startActivity(intentSignIn);
        } else {
