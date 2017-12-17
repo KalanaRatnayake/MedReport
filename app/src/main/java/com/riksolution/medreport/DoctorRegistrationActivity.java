@@ -1,5 +1,6 @@
 package com.riksolution.medreport;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,20 +23,26 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import helper.SQLiteHandler;
+import helper.SessionManager;
+
 
 public class DoctorRegistrationActivity extends AppCompatActivity {
 
-    private EditText fullname;
+    private EditText firstname;
+    private EditText lastname;
     private EditText regNumber;
     private EditText contactNo;
     private EditText hospital;
     private EditText nic;
+    private EditText checkPassWord;
 
     private EditText userName;
     private EditText passWord;
 
     private String username;
     private String password;
+    private String checkPassword;
 
     private ProgressDialog pDialog;
     private SessionManager session;
@@ -55,6 +62,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
         userName = (EditText)findViewById(R.id.etDocUsername);
         passWord = (EditText)findViewById(R.id.etDocPassword);
+        checkPassWord = (EditText)findViewById(R.id.etPasswordReenter);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -74,8 +82,9 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
         username = userName.getText().toString().trim();
         password = passWord.getText().toString().trim();
+        checkPassword = passWord.getText().toString().trim();
 
-        if (!username.isEmpty() && !password.isEmpty()) {
+        if (!username.isEmpty() && !password.isEmpty()  && password.equals(checkPassword) ) {
             //registerUser(username, password);
             strReq = new StringRequest(Request.Method.POST,
                     URL, new Response.Listener<String>() {
