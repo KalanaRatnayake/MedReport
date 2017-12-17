@@ -13,10 +13,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
     }
 
-
+    public void launchDoctor(View view){
+        Intent i = new Intent(MainActivity.this,DoctorRegistrationActivity.class);
+        startActivity(i);
+        finish();
+    }
 
 }
