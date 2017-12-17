@@ -39,6 +39,7 @@
         android:background="@android:color/darker_gray"
         android:backgroundTint="@android:color/darker_gray"
         android:scaleType="fitXY"
+        android:onClick="launchDoctor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
