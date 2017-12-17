@@ -16,16 +16,28 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/etDocFullName"
+                android:id="@+id/etDocFirstName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
-                android:hint="Full Name"
+                android:hint="First Name"
                 android:inputType="textPersonName"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etDocLastName"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="Last Name"
+                android:inputType="textPersonName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDocFirstName" />
 
             <EditText
                 android:id="@+id/etDocRegNo"
@@ -37,15 +49,15 @@
                 android:inputType="textPersonName"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etDocFullName" />
+                app:layout_constraintTop_toBottomOf="@+id/etDocLastName" />
 
             <EditText
-                android:id="@+id/etHospital"
+                android:id="@+id/etNIC"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:hint="Hospital"
+                android:hint="NIC"
                 android:inputType="textPersonName"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -62,7 +74,7 @@
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etHospital" />
+                app:layout_constraintTop_toBottomOf="@+id/etNIC" />
 
             <EditText
                 android:id="@+id/etDocUsername"
@@ -102,12 +114,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/etDocPassword" />
 
             <EditText
-                android:id="@+id/etSerialKey"
+                android:id="@+id/etHospital"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:hint="Serial-Key"
+                android:hint="Hospital"
                 android:inputType="text"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -123,7 +135,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etSerialKey" />
+                app:layout_constraintTop_toBottomOf="@+id/etHospital" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
