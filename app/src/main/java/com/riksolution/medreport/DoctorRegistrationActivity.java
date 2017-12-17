@@ -51,7 +51,6 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
     private StringRequest strReq;
     //private static final String TAG = DoctorRegistrationActivity.class.getSimpleName();
     private static final String URL = "http://10.10.26.56/MedReport/doctorRegister.php";
-    private SQLiteHandler dbhandler;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -75,10 +74,10 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         pDialog.setCancelable(false);
 
         // Session manager
-        //session = new SessionManager(getApplicationContext());
+        session = new SessionManager(getApplicationContext());
 
         // SQLite database handler
-        //db = new SQLiteHandler(getApplicationContext());
+        db = new SQLiteHandler(getApplicationContext());
         requestQueue = Volley.newRequestQueue(this);
     }
 
@@ -110,7 +109,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
                             String Encrypted_password = user.getString("Encrypted_password");
                             String Hospital = user.getString("Hospital");
 
-                            dbhandler.addDoctor(uid,firstName,lastName,regNo,nicNo,Hospital,contactNo,Username,Encrypted_password );
+                            db.addDoctor(uid,firstName,lastName,regNo,nicNo,Hospital,contactNo,Username,Encrypted_password );
 
                             startActivity(new Intent(getApplicationContext(),DoctorLoginActivity.class));
                         }else {

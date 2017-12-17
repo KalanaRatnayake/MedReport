@@ -21,4 +21,10 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    //change this metho
+    public void checkMethod(View view) {
+        Intent i = new Intent(MainActivity.this,DoctorHomepageActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

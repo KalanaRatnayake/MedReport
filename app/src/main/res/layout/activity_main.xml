@@ -83,6 +83,7 @@
         android:background="@android:color/darker_gray"
         android:backgroundTint="@android:color/darker_gray"
         android:scaleType="fitXY"
+        android:onClick="checkMethod"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.86"
