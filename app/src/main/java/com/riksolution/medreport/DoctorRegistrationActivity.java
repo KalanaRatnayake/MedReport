@@ -45,7 +45,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
     private ProgressDialog pDialog;
     private SessionManager session;
-    private SQLiteHandler db;
+    private SQLiteHandler dbhandler;
 
     private RequestQueue requestQueue;
     private StringRequest strReq;
@@ -77,7 +77,10 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         // SQLite database handler
+
         db = new SQLiteHandler(getApplicationContext());
+
+
         requestQueue = Volley.newRequestQueue(this);
     }
 

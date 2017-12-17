@@ -46,7 +46,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
        username = userName.getText().toString();
        password = passWord.getText().toString();
 
-       sendCred(username,md5(password));
+       sendCred(username,password);
    }
 
    public void sendCred(final String username, final String password){
