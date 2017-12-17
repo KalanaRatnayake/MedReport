@@ -30,14 +30,6 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" android:screenOrientation="portrait"/>
-        <activity
-            android:name=".PatientHomepageActivity"
-            android:label="@string/title_activity_patient_homepage"
-            android:theme="@style/AppTheme.NoActionBar" android:screenOrientation="portrait"/>
-        <activity
-            android:name=".DoctorHomepageActivity"
-            android:label="@string/title_activity_doctor_homepage"
-            android:theme="@style/AppTheme.NoActionBar" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

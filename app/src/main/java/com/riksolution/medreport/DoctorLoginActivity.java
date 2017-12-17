@@ -52,7 +52,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
        if(recordExists == true){
            //user can be successfully logged in
            session.setLogin(true);
-           Intent intentSignIn = new Intent(getApplicationContext(), DoctorHomepageActivity.class);
+           Intent intentSignIn = new Intent(getApplicationContext(), MainActivity.class);
            Toast.makeText(getApplicationContext(), "Login successful, redirecting to Home Page.", Toast.LENGTH_LONG).show();
            startActivity(intentSignIn);
        } else {

@@ -117,7 +117,7 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
 
                             startActivity(new Intent(getApplicationContext(),DoctorLoginActivity.class));
                         }else {
-                            Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error_msg"), Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (JSONException e) {
