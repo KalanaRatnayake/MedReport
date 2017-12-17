@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,7 +27,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
         userName = (EditText) findViewById(R.id.etDocUsername);
         passWord = (EditText) findViewById(R.id.etDocPassword);
 
-        Button btnDocLogin = (Button) findViewById(R.id.btnDocLogin);
+        Button btnDocLogin = (Button) findViewById(R.id.btnDoctor);
 
         btnDocLogin.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -55,7 +54,7 @@ public class DoctorLoginActivity extends AppCompatActivity {
         try {
 
             // Defined URL  where to send data
-            URL url = new URL("/media/webservice/httppost.php");
+            URL url = new URL("10.10.26.56/edc/user_control.php");
 
             // Send POST data request
 
@@ -75,12 +74,15 @@ public class DoctorLoginActivity extends AppCompatActivity {
             while ((line = reader.readLine()) != null) {
                 // Append server response in string
                 sb.append(line + "\n");
+
             }
 
 
             text = sb.toString();
+            userName.setText(text);
         } catch (Exception ex) {
             //connection error
+            userName.setText("connection");
         } finally {
             try {
 
