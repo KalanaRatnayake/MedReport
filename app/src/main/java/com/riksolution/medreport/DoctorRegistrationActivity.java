@@ -27,9 +27,25 @@ import helper.SQLiteHandler;
 
 public class DoctorRegistrationActivity extends AppCompatActivity {
 
-    private EditText username,password;
-    private Button sign_in_register;
+    private EditText fullname;
+    private EditText regNumber;
+    private EditText contactNo;
+    private EditText hospital;
+    private EditText nic;
+
+    private EditText userName;
+    private EditText passWord;
+
+    private String username;
+    private String password;
+
+    private ProgressDialog pDialog;
+    private SessionManager session;
+    private SQLiteHandler db;
+
     private RequestQueue requestQueue;
+    private StringRequest strReq;
+    //private static final String TAG = DoctorRegistrationActivity.class.getSimpleName();
     private static final String URL = "http://10.10.26.56/edc/user_control.php";
     private StringRequest request;
     private SQLiteHandler dbhandler;
@@ -39,70 +55,98 @@ public class DoctorRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_registration);
 
-        username = (EditText) findViewById(R.id.etDocUsername);
-        password = (EditText) findViewById(R.id.etDocPassword);
-        sign_in_register = (Button) findViewById(R.id.btnDocRegister);
 
+        userName = (EditText)findViewById(R.id.etDocUsername);
+        passWord = (EditText)findViewById(R.id.etDocPassword);
+
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
+
+        // Session manager
+        //session = new SessionManager(getApplicationContext());
+
+        // SQLite database handler
+        //db = new SQLiteHandler(getApplicationContext());
         requestQueue = Volley.newRequestQueue(this);
 
-        sign_in_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean error = jsonObject.getBoolean("error");
-                            if(!error){
-                                //usr successfully registered
-                                Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
+    }
 
-                                String uid = jsonObject.getString("uid");
-                                JSONObject user = jsonObject.getJSONObject("user");
-                                String firstName = user.getString("firstName");
-                                String lastName = user.getString("lastName");
-                                String regNo = user.getString("regNo");
-                                String nicNo = user.getString("nicNo");
-                                String contactNo = user.getString("contactNo");
-                                String Username = user.getString("Username");
-                                String Encrypted_password = user.getString("Encrypted_password");
-                                String Hospital = user.getString("Hospital");
+    public void sendPost(View view) {
 
-                                dbhandler.addDoctor(uid,firstName,lastName,regNo,nicNo,Hospital,contactNo,Username,Encrypted_password );
+        username = userName.getText().toString().trim();
+        password = passWord.getText().toString().trim();
 
-                                startActivity(new Intent(getApplicationContext(),DoctorLoginActivity.class));
-                            }else {
-                                Toast.makeText(getApplicationContext(), "Error " +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
-                            }
+        if (!username.isEmpty() && !password.isEmpty()) {
+            //registerUser(username, password);
+            strReq = new StringRequest(Request.Method.POST,
+                    URL, new Response.Listener<String>() {
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        boolean error = jsonObject.getBoolean("error");
+                        if(!error){
+                            //usr successfully registered
+                            Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            String uid = jsonObject.getString("uid");
+                            JSONObject user = jsonObject.getJSONObject("user");
+                            String firstName = user.getString("firstName");
+                            String lastName = user.getString("lastName");
+                            String regNo = user.getString("regNo");
+                            String nicNo = user.getString("nicNo");
+                            String contactNo = user.getString("contactNo");
+                            String Username = user.getString("Username");
+                            String Encrypted_password = user.getString("Encrypted_password");
+                            String Hospital = user.getString("Hospital");
+
+                            dbhandler.addDoctor(uid,firstName,lastName,regNo,nicNo,Hospital,contactNo,Username,Encrypted_password );
+
+                            startActivity(new Intent(getApplicationContext(),DoctorLoginActivity.class));
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Error" +jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                         }
 
-
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
 
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        HashMap<String,String> hashMap = new HashMap<String, String>();
-                        hashMap.put("username",username.getText().toString());
-                        hashMap.put("password",password.getText().toString());
 
-                        return hashMap;
-                    }
-                };
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-                requestQueue.add(request);
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    HashMap<String,String> hashMap = new HashMap<String, String>();
+                    hashMap.put("username",userName.getText().toString().trim());
+                    hashMap.put("password",passWord.getText().toString().trim());
+
+                    return hashMap;
+                }
+            };
+
+            requestQueue.add(this.strReq);
+
             }
-        });
-    }
-}
 
+         else {
+            Toast.makeText(getApplicationContext(),
+                    "Please enter your details!", Toast.LENGTH_LONG)
+                    .show();
+        }
+    }
+
+
+
+
+
+
+
+
+}
 
